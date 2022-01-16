@@ -1,4 +1,5 @@
 from scipy.linalg import svd
+from sklearn import preprocessing
 
 def compute_svd(X,lapack_driver='gesdd'):
     """Computes an SVD with k components, based on Lapack librairies
@@ -30,5 +31,17 @@ def compute_svd(X,lapack_driver='gesdd'):
     return U,S,V
 
 
+
+
+def scale(X,center,scale):
+    """ center and scale data"""
+    scaler = preprocessing.StandardScaler(
+                copy=False,
+                with_mean=center,
+                with_std=scale
+            ).fit(X)
+    X = scaler.transform(X)
+
+    return X
 
 
